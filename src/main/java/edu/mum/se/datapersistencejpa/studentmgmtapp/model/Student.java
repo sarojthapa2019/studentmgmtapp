@@ -24,9 +24,17 @@ public class Student {
     @JoinColumn(name = "transcript_fk")
     private Transcript transcript;
 
-    @ManyToMany
-    private List<ClassRoom> classRoomList =new ArrayList<>();
+    public ClassRoom getClassRoom() {
+        return classRoom;
+    }
 
+    public void setClassRoom(ClassRoom classRoom) {
+        this.classRoom = classRoom;
+    }
+
+    @ManyToOne()
+    @JoinColumn(name = "classroomId")
+    private ClassRoom classRoom;
     public Student(String studentNumber, String firstName, String middleName, String lastName,
                    Double cgpa, LocalDate dateOfEnrollment ){
         this.studentNumber = studentNumber;
@@ -36,9 +44,7 @@ public class Student {
         this.cgpa = cgpa;
         this.dateOfEnrollment = dateOfEnrollment;
     }
-    public void addClassRoom(ClassRoom classRoom){
-            classRoomList.add(classRoom);
-    }
+
     public String getStudentNumber() {
         return studentNumber;
     }

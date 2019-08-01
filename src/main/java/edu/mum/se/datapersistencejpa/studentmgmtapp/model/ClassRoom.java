@@ -13,7 +13,7 @@ public class ClassRoom {
     private String buildingName;
     private String roomNumber;
 
-    @ManyToMany(mappedBy = "classRoomList", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
     private List<Student> studentList = new ArrayList<>();
 
     public ClassRoom(String buildingName, String roomNumber) {
@@ -22,7 +22,7 @@ public class ClassRoom {
     }
     public void addStudent(Student student){
         studentList.add(student);
-        student.addClassRoom(this);
+        student.setClassRoom(this);
     }
     public String getBuildingName() {
         return buildingName;
@@ -46,7 +46,6 @@ public class ClassRoom {
                 "classroomId=" + classroomId +
                 ", buildingName='" + buildingName + '\'' +
                 ", roomNumber=" + roomNumber +
-
                 '}';
     }
 }
